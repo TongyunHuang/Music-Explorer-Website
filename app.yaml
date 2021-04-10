@@ -1,0 +1,23 @@
+runtime: python3
+
+instance_class: F1
+
+env_variables:
+  MYSQL_USER: 'root'  ## ??
+  MYSQL_PASSWORD: 'saltyfish411'   ##<fill password>
+  MYSQL_DB: 'musicDB'
+  MYSQL_HOST: '173.255.116.10' ## ??
+
+# Local Instance
+env_variables:
+  MYSQL_USER: 'root'  ## ??
+  MYSQL_PASSWORD: 'fly510700'   ##<fill password>
+  MYSQL_DB: 'musicDB'
+  MYSQL_HOST: '173.255.116.10' ## ??
+
+# handlers:
+# # - url: /script
+# #   static_dir: static/script
+
+# - url: /styles
+#   static_dir: static/styles
