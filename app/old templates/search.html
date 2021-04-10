@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar_container">
+            <a href="index.html" id="navbar_logo">
+                <img src="{{url_for('static', filename='images/logo.png')}}" alt="Music Explorer">
+            </a>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="index.html" class="navbar_links">Home</a>
+                    </li>
+                    <li>
+                        <a href="search.html" class="navbar_links">Search</a>
+                    </li>
+                    <li>
+                        <a href="index.html" class="navbar_links">About</a>
+                    </li>
+                    <li>
+                        <a class="navbar_links">|</a>
+                    </li>
+                    <li>
+                        <a href="sign_in.html" class="button">Sign in</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <form class="search" autocomplete="off">
+      <input type="text" placeholder="Search by Title.." onkeyup="search()" id="searchInput">
+      <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+
+    <div class="search_box">
+        <ul>
+            <li onclick="reset()" id="td_reset">Reset</li>
+            <li onclick="uplift()" id="td_uplifting">Uplifting</li>
+            <li onclick="relax()" id="td_relaxing">Relaxing</li>
+            <li onclick="sad()" id="td_sad">Sad</li>
+        </ul>
+    </div>
+
+    <table class="main_table">
+        <tr style="background-color: lightblue">
+            <th>Title</th>
+            <th>Artist</th>
+            <th>Genre</th>
+            <th>duration</th>
+        </tr>
+        <tbody id="table_entry">
+            
+            {% for item in items %}
+            <tr>
+                <td>{{item[0]}}</td>
+                <td>{{item[1]}}</td>
+                <td>{{item[2]}}</td>
+            </tr>
+            {% endfor %}
+            
+        </tbody>
+    </table>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="static/data.js"></script>
+    <script>
+        function search() {
+            let input = document.getElementById("searchInput");
+            
+            input = input.value.toLowerCase();
+            let tableBody = document.getElementById("table_entry");
+            for (var i = 0, row; row = tableBody.rows[i]; i++) {
+                let title = row.cells[0];
+                console.log(title);
+                title = title.textContent.toLowerCase();
+                if (!title.includes(input)) {
+                    row.style.display = "none";
+                } else {
+                    row.style.display = "";
+                }
+            }
+        }
+
+
+
+        // function insertrow(genreFilter) {    
+        //     var tableBody = document.getElementById("table_entry");
+        //     tableBody.innerHTML = ""
+        //     for (var key in song_list) {
+        //         if (genreFilter.length == 0 | genreFilter.includes(`${song_list[key].genre}`)) {
+        //             var row = `<tr>
+        //                             <td>${song_list[key].title}</td>
+        //                             <td>${song_list[key].artist}</td>
+        //                             <td>${song_list[key].genre}</td>
+        //                             <td>${song_list[key].duration}</td>
+        //                     </tr>`;
+        //             tableBody.innerHTML += row;
+        //         }
+        //     }
+        // }
+        // insertrow([]);
+
+        const newBg = "lightcyan";
+        const oldBg = "#eee";
+        var genreFilter = [];
+        function reset() {
+            allBox = [];
+            allBox.push(document.getElementById("td_reset"));
+            allBox.push(document.getElementById("td_uplifting"));
+            allBox.push(document.getElementById("td_relaxing"));
+            allBox.push(document.getElementById("td_sad"));
+            genreFilter = [];
+            allBox.forEach(element => {
+                if (element.style.background != oldBg) {
+                    element.style.background = oldBg;
+                }
+            });
+            insertrow(genreFilter);
+        }
+
+        function uplift() {
+            let a = document.getElementById("td_uplifting");
+            updateOnClick(a);
+        }
+
+        function relax() {
+            let a = document.getElementById("td_relaxing");
+            updateOnClick(a);
+        }
+
+        function sad() {
+            let a = document.getElementById("td_sad");
+            updateOnClick(a);
+        }
+
+        function updateOnClick(a) {
+            if (a.style.background == newBg) {
+                a.style.background = oldBg;
+                let index = genreFilter.indexOf(a.textContent);    
+                if (index > -1) {
+                    genreFilter.splice(index, 1);
+                }
+                insertrow(genreFilter);
+            } else {
+                a.style.background = newBg;
+                genreFilter.push(a.textContent);
+                insertrow(genreFilter)
+            }
+        }
+    </script>
+
+</body>
+
+
+</html>

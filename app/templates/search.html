@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
+    <!-- Navigation Bar -->
     <div class="navbar">
         <div class="navbar_container">
             <a href="index.html" id="navbar_logo">
@@ -17,10 +18,10 @@
             <nav>
                 <ul>
                     <li>
-                        <a href="index.html" class="navbar_links">Home</a>
+                        <a href="" class="navbar_links">Home</a>
                     </li>
                     <li>
-                        <a href="search.html" class="navbar_links">Search</a>
+                        <a href="search" class="navbar_links">Search</a>
                     </li>
                     <li>
                         <a href="index.html" class="navbar_links">About</a>
@@ -36,76 +37,106 @@
         </div>
     </div>
 
-    <form class="search" autocomplete="off">
-      <input type="text" placeholder="Search by Title.." onkeyup="search()" id="searchInput">
-      <button type="submit"><i class="fa fa-search"></i></button>
+<!-- Search keyword box -->
+    <form class="search" autocomplete="off" >
+      <input type="text" placeholder="Search by Title.." onkeyup="search()" id="searchInput" name="input">
+      <button type="submit" id="search_start" ><i class="fa fa-search"></i></button>
     </form>
 
+<!-- choose table and action box -->
     <div class="search_box">
         <ul>
-            <li class="search_title">Table</li>
-            <li onclick="displayTable(this.id)" id="songTable">Song</li>
-            <li onclick="displayTable(this.id)" id="artistTable">Artist</li>
-            <li onclick="displayTable(this.id)" id="albumTable">Album</li>
-            <li onclick="displayTable(this.id)" id="commentTable">Comment</li>
-            <li onclick="displayTable(this.id)" id="coverTable">Cover</li>
-            <li onclick="displayTable(this.id)" id="reset">Reset Tables</li>
+            <li class="search_title">Tablb</li>
+            <li id="songTable" >
+                <a href="/search/song">Song</a>
+            </li>
+            <li id="artistTable">
+                <a href="/search/artist">Artist</a>
+            </li>
+            <li id="albumTable">
+                <a href="/search/album">Album</a>
+            </li>
+            <li id="commentTable">
+                <a href="/search/comment">Comment</a>
+            </li>
+            <li id="coverTable">
+                <a href="/search/cover">Cover</a>
+            </li>
+            <li id="reset">
+                <a href="/search">Reset Tables</a>
+            </li>
+            
         </ul>
 
         <ul>
             <li class="search_title">CRUD</li>
-            <li onclick="insertCRUD()" id="insertCRUD">Insert</li>
-            <li onclick="updateCRUD()" id="updateCRUD">Update</li>
-            <li id="deleteCRUD">Delete</li>
+            <!-- <li onclick="insertCRUD()" id="insertCRUD">Insert</li> -->
+            <li>
+                    <a href="/search/song/create">Song Insert</a>
+            </li>
+            <!-- <button id="exeCRUD" href="/search/song/create">Song Insert</button> -->
+            <!-- <li onclick="updateCRUD()" id="updateCRUD">Update</li> -->
+            <!-- <li id="deleteCRUD">Delete</li> -->
         </ul>
 
-        <!-- <ul>
-            <li onclick="reset()" id="td_reset">Reset</li>
-            <li onclick="uplift()" id="td_uplifting">Uplifting</li>
-            <li onclick="relax()" id="td_relaxing">Relaxing</li>
-            <li onclick="sad()" id="td_sad">Sad</li>
-        </ul> -->
+        
     </div>
-
+    <!-- Insert -->
     <div id="insertModal">
         <div class="insertModalContent">
-            <div onclick="closeModal(this.parentNode.parentNode.id)" id="close">+</div>
+            <!-- <div onclick="closeModal(this.parentNode.parentNode.id)" id="close">+</div>
             <p id="infoCRUD"></p>
             <div id="modalInput">
                 
-            </div>
-            <button id="exeCRUD">Insert</button>
+            </div> -->
+            
         </div>
     </div>
 
-
-    <div id="updateModal">
+    <!-- Update -->
+    <!-- <div id="updateModal">
         <div class="updateModalContent">
             <div onclick="closeModal(this.parentNode.parentNode.id)" id="close">+</div>
             <p id="infoCRUD"></p>
 
         </div>
-    </div>
+    </div> -->
 
 
 
     <div class="note">
         <p>Note: Only top 15 rows are displayed. You can only choose one table at a time</p>
     </div>
-    
-    <table class="main_table">
 
-        <tr style="background-color: lightblue" id="table_title">
-
-        </tr>
+    <!-- Main table -->
+    <!-- Dynamic table with Jinja2: https://www.youtube.com/watch?v=mCy52I4exTU -->
+    <table class="main_table"  >
+        <!-- Table Header -->
+        <thead style="background-color: lightblue" id="table_title">
+            {% for head in header %}
+                <th>{{head}}</th>
+            {% endfor %}
+            <th>update</th>
+            <th>delete</th>
+        </thead>
+        <!-- Table Entry -->
         <tbody id="table_entry">
+            {% for item in items %}
+            <tr>
+                {% for cell in item %}
+                <td>{{cell}}</td>
+                {% endfor %}
+                <td><button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#task-modal" data-source="{{item[0]}}" data-content="{{item[-1]}}">edit<i class="fa fa-pen fa-1" aria-hidden="true"></i></button></td>
 
+                <td><button class="btn btn-outline-secondary btn-sm remove" data-source="{{item[0]}}" type="button"><i class="fa fa-trash fa-1" aria-hidden="true"></i></button></td>
+            </tr> 
+            {% endfor %}
         </tbody>
     </table>
 
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>    
     <script src="static/script/app.js"></script>
-
+    <script src="static/script/model.js"></script>
     <script>
 
         function passIn(dataVariable) {

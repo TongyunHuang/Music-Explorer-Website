@@ -9,11 +9,7 @@ env_variables:
   MYSQL_HOST: '173.255.116.10' ## ??
 
 # Local Instance
-env_variables:
-  MYSQL_USER: 'root'  ## ??
-  MYSQL_PASSWORD: 'fly510700'   ##<fill password>
-  MYSQL_DB: 'musicDB'
-  MYSQL_HOST: '173.255.116.10' ## ??
+
 
 # handlers:
 # # - url: /script

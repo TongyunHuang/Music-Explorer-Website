@@ -1,3 +1,6 @@
+'''
+we want to encapsulate the app inside this module
+'''
 import os
 import sqlalchemy
 from yaml import load, Loader
@@ -17,10 +20,10 @@ def init_connect_engine():
     pool = sqlalchemy.create_engine(
         sqlalchemy.engine.url.URL(
             drivername="mysql+pymysql",
-            username=os.environ.get('MYSQL_USER'), #username
-            password=os.environ.get('MYSQL_PASSWORD'), #password
-            database=os.environ.get('MYSQL_DB'), #database name
-            host=os.environ.get('MYSQL_HOST') #ip address
+            username=os.environ.get('MYSQL_USER'),
+            password=os.environ.get('MYSQL_PASSWORD'),
+            database=os.environ.get('MYSQL_DB'),
+            host=os.environ.get('MYSQL_HOST')
         )
     )
     return pool
@@ -30,4 +33,6 @@ db = init_connect_engine()
 
 app = Flask(__name__)
 
-from app import routes
+from app import routes, songRoutes
+
+    

@@ -27,57 +27,64 @@ function updateTableOnClick(id) {
     }
 }
 
-function updateTable(tableName) {
-    var tableTitle = document.getElementById("table_title");
-    var tableBody = document.getElementById("table_entry");
-    if (tableName === "Reset Tables") {
-        tableBody.innerHTML = "";
-        tableTitle.innerHTML = "";
-        return;
-    }
-    tableTitle.innerHTML = "";
-    var title = ``;
-    if (tableName === "Song") {
-        var col = dataTable["songCol"];
-        col.forEach(function(items, index) {
-            title += `<th>${items}</th>\n`;
-        });
-    } else if (tableName === "Album") {
-        var col = dataTable["albumCol"];
-        col.forEach(function(items, index) {
-            title += `<th>${items}</th>\n`;
-        });
-    } else if (tableName === "Cover") {
-        var col = dataTable["coverCol"];
-        col.forEach(function(items, index) {
-            title += `<th>${items}</th>\n`;
-        });
-    } else if (tableName === "Comment") {
-        var col = dataTable["commentCol"];
-        col.forEach(function(items, index) {
-            title += `<th>${items}</th>\n`;
-        });
-    } else if (tableName === "Artist") {
-        var col = dataTable["artistCol"];
-        col.forEach(function(items, index) {
-            title += `<th>${items}</th>\n`;
-        });
-    }
-    tableTitle.innerHTML = title;
+/**
+ * transfer between different table
+ * Not called
+ */
+// function updateTable(tableName) {
+//     var tableTitle = document.getElementById("table_title");
+//     var tableBody = document.getElementById("table_entry");
+//     if (tableName === "Reset Tables") {
+//         tableBody.innerHTML = "";
+//         tableTitle.innerHTML = "";
+//         return;
+//     }
+//     tableTitle.innerHTML = "";
+//     var title = ``;
+//     if (tableName === "Song") {
+//         var col = dataTable["songCol"];
+//         col.forEach(function(items, index) {
+//             title += `<th>${items}</th>\n`;
+//         });
+//     } else if (tableName === "Album") {
+//         var col = dataTable["albumCol"];
+//         col.forEach(function(items, index) {
+//             title += `<th>${items}</th>\n`;
+//         });
+//     } else if (tableName === "Cover") {
+//         var col = dataTable["coverCol"];
+//         col.forEach(function(items, index) {
+//             title += `<th>${items}</th>\n`;
+//         });
+//     } else if (tableName === "Comment") {
+//         var col = dataTable["commentCol"];
+//         col.forEach(function(items, index) {
+//             title += `<th>${items}</th>\n`;
+//         });
+//     } else if (tableName === "Artist") {
+//         var col = dataTable["artistCol"];
+//         col.forEach(function(items, index) {
+//             title += `<th>${items}</th>\n`;
+//         });
+//     }
+//     tableTitle.innerHTML = title;
 
-    tableBody.innerHTML = "";
-    var tableEntry = dataTable[tableName];
-    var row = ``;
-    tableEntry.forEach(function(items, index) {
-        row += `<tr>\n`
-        items.forEach(function(entry, i) {
-            row += `    <td>${entry}</td>\n`
-        })
-        row += `</tr>\n`
-    });
-    tableBody.innerHTML += row;
-}
+//     tableBody.innerHTML = "";
+//     var tableEntry = dataTable[tableName];
+//     var row = ``;
+//     tableEntry.forEach(function(items, index) {
+//         row += `<tr>\n`
+//         items.forEach(function(entry, i) {
+//             row += `    <td>${entry}</td>\n`
+//         })
+//         row += `</tr>\n`
+//     });
+//     tableBody.innerHTML += row;
+// }
 
+/**
+ * Insert interface pop up when insert operation was choosen
+ */
 function insertCRUD() {
     var tableUpdated;
     for (var i = 0; i < allTablesId.length; i++) {
@@ -107,6 +114,9 @@ function insertCRUD() {
     }
 }
 
+/**
+ * Update interface pop up when insert operation was choosen
+ */
 function updateCRUD() {
     var tableUpdated;
     for (var i = 0; i < allTablesId.length; i++) {
@@ -148,20 +158,50 @@ function sad() {
 }
 
 
-
-function search() {
-    let input = document.getElementById("searchInput");
+/**
+ * Search locally
+ */
+// function search() {
+//     let input = document.getElementById("searchInput");
     
-    input = input.value.toLowerCase();
-    let tableBody = document.getElementById("table_entry");
-    for (var i = 0, row; row = tableBody.rows[i]; i++) {
-        let title = row.cells[0];
-        console.log(title);
-        title = title.textContent.toLowerCase();
-        if (!title.includes(input)) {
-            row.style.display = "none";
-        } else {
-            row.style.display = "";
-        }
-    }
-}
+//     input = input.value.toLowerCase();
+//     $.ajax({
+//         type: 'POST',
+//         url: window.location.href + input,
+//         contentType: 'application/json;charset=UTF-8',
+//         success: function (res) {
+//             console.log(res.response)
+//             location.reload();
+//         },
+//         error: function () {
+//             console.log('Error');
+//         }
+//     });
+    // let tableBody = document.getElementById("table_entry");
+    // for (var i = 0, row; row = tableBody.rows[i]; i++) {
+    //     let title = row.cells[0];
+    //     console.log(title);
+    //     title = title.textContent.toLowerCase();
+    //     if (!title.includes(input)) {
+    //         row.style.display = "none";
+    //     } else {
+    //         row.style.display = "";
+    //     }
+    // }
+// }
+// function search_start(){
+//     let input = document.getElementById("searchInput");
+//     input = input.value.toLowerCase();
+//     $.ajax({
+//         type: 'POST',
+//         url: "/"+ input,
+//         contentType: 'application/json;charset=UTF-8',
+//         success: function (res) {
+//             console.log(res.response)
+//             location.reload();
+//         },
+//         error: function () {
+//             console.log('Error');
+//         }
+//     });
+// }

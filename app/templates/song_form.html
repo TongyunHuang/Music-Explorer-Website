@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Song form</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <form class="search" autocomplete="off" >
+            <input type="text" placeholder="Song id"  name="song_id">
+            <input type="text" placeholder="Song name"  name="song_name">
+            <input type="text" placeholder="Artist"  name="artist">
+            <input type="text" placeholder="Duration"  name="duration">
+            <input type="text" placeholder="popularity"  name="popularity">
+            <button type="submit" ><i class="fa fa-search"></i></button>
+    </form>
+
+    <li>
+        <a href="/search/song" class="navbar_links">Back</a>
+    </li>
+</body>
+</html>
