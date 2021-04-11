@@ -3,6 +3,7 @@ from app import app
 from app import database as db_helper
 import json
 from app import songDB as songDB
+from app import albumDB as albumDB
 
 @app.route("/")
 def homepage():
@@ -53,15 +54,6 @@ def get_cover_entry():
     '''
     data, dataCol = db_helper.fetch_cover()
     return render_template("search.html", items=data, header=dataCol)
-
-@app.route("/search/album")
-def get_album_entry():
-    '''
-    Display album table on Interface
-    '''
-    data, dataCol = db_helper.fetch_album()
-    return render_template("search.html", items=data, header=dataCol)
-
 
 
 '''
