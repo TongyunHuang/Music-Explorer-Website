@@ -1,4 +1,4 @@
-from flask import Flask, render_template,request
+from flask import Flask, render_template,request,jsonify,redirect
 from app import app
 from app import database as db_helper
 import json
@@ -12,18 +12,17 @@ By Tongyun
 def get_song_entry():
     '''
     Display song table on Interface
+    @STATUS:FINISH
     '''
     key = request.args.get('input')
-    print(key)
     if key:
-        print("here")
         data,dataCol = songDB.find_song(key)
         result = {'success': True, 'response': 'Done'}
-        return render_template("search.html", items=data, header=dataCol)
+        return render_template("search.html", items=data, header=dataCol, table="song")
     else:
         song, songCol = db_helper.fetch_song()
         dataTable={"Song": song, "songCol": songCol}
-        return render_template("search.html", items=song, header=songCol)
+        return render_template("search.html", items=song, header=songCol, table="song")
 
 @app.route("/search/song/create")
 def create():
@@ -42,31 +41,48 @@ def create():
     else:
         return render_template("song_form.html")
 
-@app.route("/edit/<int:song_id>", methods=['POST'])
+@app.route("/search/song/update/<song_id>", methods=['POST','GET'])
 def update(song_id):
     """ recieved post requests for entry updates """
+    song_info = songDB.fetch_single_song(song_id)
+    print(song_info)
+    if request.method == 'POST':
+        try:
+            song_name = request.form['new_name']
+            artist = request.form['new_artist']
+            print(song_name, artist)
+            songDB.update_entry(song_id, song_name, artist)
+            return redirect("/search/song")
+        except:
+            result = {'success': False, 'response': 'Something went wrong'}
+            return jsonify(result)
+    else:
+        return render_template("song_update.html",info=song_info)
+    
 
-    data = request.get_json()
-
-    try:
-        if "status" in data:
-            songDB.update_status_entry(song_id, data["status"])
-            result = {'success': True, 'response': 'Status Updated'}
-        else:
-            result = {'success': True, 'response': 'Nothing Updated'}
-    except:
-        result = {'success': False, 'response': 'Something went wrong'}
-
-    return jsonify(result)
-
-@app.route("/delete/<int:song_id>", methods=['POST'])
+@app.route("/search/song/delete/<song_id>")
 def delete(song_id):
     """ recieved post requests for entry delete """
-
+    print("song_id = "+song_id)
     try:
-        songDB.remove_task_by_id(song_id)
+        songDB.remove_song_by_id(song_id)
         result = {'success': True, 'response': 'Removed task'}
+        return redirect("/search/song")
     except:
         result = {'success': False, 'response': 'Something went wrong'}
 
     return jsonify(result)
+
+'''
+SELECT a.artist_name, a.num_followers, s.song_name, s.album_name, s.release_date, s.popularity
+FROM musicDB.Artist a NATURAL JOIN musicDB.Song s
+WHERE (s.release_date LIKE '%/%/0%' OR s.release_date LIKE '%/%/10' ) AND a.num_followers > (SELECT AVG(num_followers) FROM musicDB.Artist)
+ORDER BY s.popularity;
+'''
+@app.route("/advance/tongyun/")
+def tongyun_adv():
+    decade = request.args.get('decade') # 90,00,10
+    if decade:
+        res, res_col = songDB.tongyun_fetch(decade)
+        return render_template("tongyun_adv_sql.html",header=res_col, items=res)
+    return render_template("tongyun_adv_sql.html")

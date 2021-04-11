@@ -1,4 +1,4 @@
-from flask import Flask, render_template,request
+from flask import Flask, render_template,request,jsonify
 from app import app
 from app import database as db_helper
 import json
@@ -17,6 +17,13 @@ def search():
     Search page starts from here
     '''
     return render_template('search.html')
+
+@app.route("/advance")
+def advance():
+    '''
+    Advance query index page starts from here
+    '''
+    return render_template('adv_sql_index.html')
 
 '''
 DISPLAY - Limit 15

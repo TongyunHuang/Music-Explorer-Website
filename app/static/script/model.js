@@ -1,4 +1,19 @@
-// $(document).ready(function () {
+$(document).ready(function () {
+    $('.remove').click(function () {
+        const remove = $(this)
+        $.ajax({
+            type: 'POST',
+            url: '/delete/' + remove.data('source'),
+            success: function (res) {
+                console.log(res.response)
+                location.reload();
+            },
+            error: function () {
+                console.log('Error');
+            }
+        });
+    });
+});
 //     // example: https://getbootstrap.com/docs/4.2/components/modal/
 //     // show modal
 //     // jQuery Selectors: https://www.w3schools.com/jquery/jquery_selectors.asp

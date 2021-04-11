@@ -24,7 +24,7 @@
                         <a href="search" class="navbar_links">Search</a>
                     </li>
                     <li>
-                        <a href="index.html" class="navbar_links">About</a>
+                        <a href="advance" class="navbar_links">Advance</a>
                     </li>
                     <li>
                         <a class="navbar_links">|</a>
@@ -126,18 +126,18 @@
                 {% for cell in item %}
                 <td>{{cell}}</td>
                 {% endfor %}
-                <td><button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#task-modal" data-source="{{item[0]}}" data-content="{{item[-1]}}">edit<i class="fa fa-pen fa-1" aria-hidden="true"></i></button></td>
-
-                <td><button class="btn btn-outline-secondary btn-sm remove" data-source="{{item[0]}}" type="button"><i class="fa fa-trash fa-1" aria-hidden="true"></i></button></td>
+                <td><a href="{{table}}/update/{{item[0]}}" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#task-modal" >edit</a></td>
+                <td><a  href="{{table}}/delete/{{item[0]}}" class="btn btn-outline-secondary btn-sm remove" >Delete</a></td>
+                <!-- <td><button class="btn btn-outline-secondary btn-sm remove" data-source="{{item[0]}}" type="button"><i class="fa fa-trash fa-1" aria-hidden="true"></i></button></td> -->
             </tr> 
             {% endfor %}
         </tbody>
     </table>
 
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>    
-    <script src="static/script/app.js"></script>
-    <script src="static/script/model.js"></script>
-    <script>
+    <!-- <script src="static/script/app.js"></script>-->
+    <script src="static/script/model.js"></script> 
+    <!-- <script>
 
         function passIn(dataVariable) {
             receive(dataVariable);
@@ -148,7 +148,7 @@
             updateTableOnClick(id);
         }
 
-    </script>
+    </script> -->
 
 
 </body>
