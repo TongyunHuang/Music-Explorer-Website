@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Album form</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <form class="search" autocomplete="off" >
+            <input type="text" placeholder="Album id"  name="album_id">
+            <input type="text" placeholder="Album name"  name="album_name">
+            <input type="text" placeholder="Album type"  name="album_type">
+            <input type="text" placeholder="Release Date"  name="album_release_date">
+            <button type="submit" ><i class="fa fa-search"></i></button>
+    </form>
+
+    <li>
+        <a href="/search/album" class="navbar_links">Back</a>
+    </li>
+</body>
+</html>
