@@ -6,7 +6,7 @@ from app import albumDB as albumDB
 '''
 Album CRUB backend: Insert, Update, Delete, Search by Album keywords
 Shirley advanceSQL backend.
-By xwnag303
+By xwang303
 '''
 @app.route("/search/album")
 def get_album_entry():
@@ -26,7 +26,7 @@ def get_album_entry():
 
 @app.route("/search/album/create")
 def create_album():
-    """ recieves post requests to add new task """
+    """ receives post requests to add new task """
 
     album_id = request.args.get('album_id')
     album_name = request.args.get('album_name')
@@ -41,7 +41,7 @@ def create_album():
 
 @app.route("/search/album/update/<album_id>", methods=['POST','GET'])
 def update_album(album_id):
-    """ recieved post requests for entry updates """
+    """ receives post requests for entry updates """
     album_info = albumDB.fetch_single_album(album_id)
     print(album_info)
     if request.method == 'POST':
@@ -60,7 +60,7 @@ def update_album(album_id):
 
 @app.route("/search/album/delete/<album_id>")
 def delete_album(album_id):
-    """ recieved post requests for entry delete """
+    """ receives post requests for entry delete """
     print("album_id = "+album_id)
     try:
         albumDB.remove_album_by_id(album_id)

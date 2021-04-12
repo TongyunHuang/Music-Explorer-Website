@@ -4,6 +4,7 @@ from app import database as db_helper
 import json
 from app import songDB as songDB
 from app import albumDB as albumDB
+from app import artistDB as artistDB
 
 @app.route("/")
 def homepage():
@@ -26,6 +27,13 @@ def advance():
     '''
     return render_template('adv_sql_index.html')
 
+@app.route("/sign_in")
+def sign_in():
+    '''
+    Sign in page starts from here
+    '''
+    return render_template('sign_in.html')
+
 '''
 DISPLAY - Limit 15
 '''
@@ -39,13 +47,13 @@ def get_comment_entry():
     data, dataCol = db_helper.fetch_comment()
     return render_template("search.html", items=data, header=dataCol)
 
-@app.route("/search/artist")
-def get_artist_entry():
-    '''
-    Display artist table on Interface
-    '''
-    data, dataCol = db_helper.fetch_artist()
-    return render_template("search.html", items=data, header=dataCol)
+# @app.route("/search/artist")
+# def get_artist_entry():
+#     '''
+#     Display artist table on Interface
+#     '''
+#     data, dataCol = db_helper.fetch_artist()
+#     return render_template("search.html", items=data, header=dataCol)
 
 @app.route("/search/cover")
 def get_cover_entry():

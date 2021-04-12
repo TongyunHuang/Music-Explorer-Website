@@ -69,7 +69,7 @@ def fetch_artist():
     conn = db.connect()
     query_results = conn.execute("Select * from Artist;").fetchall()
     column_name = conn.execute("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'Artist' ORDER BY ORDINAL_POSITION").fetchall()
-    res_col = [column_name[0][0], column_name[3][0], column_name[4][0]]
+    res_col = [column_name[1][0], column_name[0][0], column_name[3][0], column_name[4][0]]
     res = []
     count = 0
     for result in query_results:
@@ -77,6 +77,7 @@ def fetch_artist():
         if count > number_of_results_displayed:
             break
         item = [
+                result[1],
                 result[0],
                 result[3],
                 result[4]
