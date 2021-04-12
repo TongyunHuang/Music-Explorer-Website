@@ -49,7 +49,6 @@ def artist_update(artist_id):
             url = request.form['new_url']
             num_followers = request.form['new_num_followers']
             print(artist_name, num_followers, url)
-            print("HHEASHDLKASHLD")
             artistDB.update_artist_entry(artist_id, artist_name, num_followers, url)
             return redirect("/search/artist")
         except:
