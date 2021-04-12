@@ -5,6 +5,7 @@ import json
 from app import songDB as songDB
 from app import albumDB as albumDB
 from app import artistDB as artistDB
+from app import commentDB as commentDB
 
 @app.route("/")
 def homepage():
@@ -39,13 +40,13 @@ DISPLAY - Limit 15
 '''
 
 
-@app.route("/search/comment")
-def get_comment_entry():
-    '''
-    Display comment table on Interface
-    '''
-    data, dataCol = db_helper.fetch_comment()
-    return render_template("search.html", items=data, header=dataCol)
+# @app.route("/search/comment")
+# def get_comment_entry():
+#     '''
+#     Display comment table on Interface
+#     '''
+#     data, dataCol = db_helper.fetch_comment()
+#     return render_template("search.html", items=data, header=dataCol)
 
 # @app.route("/search/artist")
 # def get_artist_entry():

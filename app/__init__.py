@@ -33,6 +33,6 @@ db = init_connect_engine()
 
 app = Flask(__name__)
 
-from app import routes, songRoutes, albumRoutes, artistRoutes
+from app import routes, songRoutes, albumRoutes, artistRoutes, commentRoutes
 
     

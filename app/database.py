@@ -90,7 +90,7 @@ def fetch_comment():
     conn = db.connect()
     query_results = conn.execute("Select * from Comment;").fetchall()
     column_name = conn.execute("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'Comment' ORDER BY ORDINAL_POSITION").fetchall()
-    res_col = [column_name[1][0], column_name[2][0]]
+    res_col = [column_name[0][0], column_name[1][0], column_name[2][0]]
     res = []
     count = 0
     for result in query_results:
@@ -98,6 +98,7 @@ def fetch_comment():
         if count > number_of_results_displayed:
             break
         item = [
+                result[0],
                 result[1],
                 result[2]
         ]
