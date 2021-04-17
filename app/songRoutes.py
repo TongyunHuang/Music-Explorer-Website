@@ -26,7 +26,7 @@ def get_song_entry():
 
 @app.route("/search/song/create")
 def create():
-    """ recieves post requests to add new task """
+    """ receives post requests to add new task """
     # data = request.get_json()
     
     song_id = request.args.get('song_id')
@@ -43,7 +43,7 @@ def create():
 
 @app.route("/search/song/update/<song_id>", methods=['POST','GET'])
 def update(song_id):
-    """ recieved post requests for entry updates """
+    """ receives post requests for entry updates """
     song_info = songDB.fetch_single_song(song_id)
     print(song_info)
     if request.method == 'POST':
@@ -62,7 +62,7 @@ def update(song_id):
 
 @app.route("/search/song/delete/<song_id>")
 def delete(song_id):
-    """ recieved post requests for entry delete """
+    """ receives post requests for entry delete """
     print("song_id = "+song_id)
     try:
         songDB.remove_song_by_id(song_id)
