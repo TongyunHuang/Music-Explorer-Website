@@ -29,13 +29,6 @@ def advance():
     '''
     return render_template('adv_sql_index.html')
 
-@app.route("/sign_in")
-def sign_in():
-    '''
-    Sign in page starts from here
-    '''
-    return render_template('sign_in.html')
-
 '''
 DISPLAY - Limit 15
 '''

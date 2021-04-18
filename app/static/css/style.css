@@ -140,22 +140,31 @@
     overflow: hidden;
 }
 
-.input_group, .input_group_register{
+.input_group{
     margin-top: -20px;
     padding: 20px;
     position: absolute;
     width: 150px;
 }
 
-.input_group p, .input_group_register p{
-    width: 300%;
+.input_group a{
+    width: 100%;
     color: rgb(77, 155, 223);
-    text-align: right;
+    position: relative;
+    left: 285px;
     font-family: 'Lato', sans-serif;
 }
 
-.input_group p:hover, .input_group_register p:hover{
+.input_group a:hover{
     cursor: pointer;
+}
+
+.input_group span {
+    display: block;
+    color: rgb(224, 53, 53);
+    width: 300%;
+    font-size: 13px;
+    font-family: 'Lato', sans-serif;
 }
 
 .text_input{
@@ -178,12 +187,8 @@
     border-color: black;
 }
 
-#login{
+#login, #register{
     left: 65px;
-}
-
-#register{
-    left: 500px;
 }
 
 .submit_button{

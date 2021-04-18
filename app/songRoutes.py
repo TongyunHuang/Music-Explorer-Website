@@ -34,6 +34,7 @@ def create():
     artist = request.args.get('artist')
     duration = request.args.get('duration')
     popularity = request.args.get('popularity')
+    print(song_id, song_name)
     if song_name or artist or duration or popularity:
         songDB.insert_new_song(song_id,song_name,artist,duration,int(popularity))
         result = {'success': True, 'response': 'Done'}
