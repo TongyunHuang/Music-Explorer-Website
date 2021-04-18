@@ -6,6 +6,7 @@ from app import songDB as songDB
 from app import albumDB as albumDB
 from app import artistDB as artistDB
 from app import commentDB as commentDB
+from app import coverDB as coverDB
 
 @app.route("/")
 def homepage():
@@ -56,13 +57,13 @@ DISPLAY - Limit 15
 #     data, dataCol = db_helper.fetch_artist()
 #     return render_template("search.html", items=data, header=dataCol)
 
-@app.route("/search/cover")
-def get_cover_entry():
-    '''
-    Display cover table on Interface
-    '''
-    data, dataCol = db_helper.fetch_cover()
-    return render_template("search.html", items=data, header=dataCol)
+# @app.route("/search/cover")
+# def get_cover_entry():
+#     '''
+#     Display cover table on Interface
+#     '''
+#     data, dataCol = db_helper.fetch_cover()
+#     return render_template("search.html", items=data, header=dataCol)
 
 
 '''
