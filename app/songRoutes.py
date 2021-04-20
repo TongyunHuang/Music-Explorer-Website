@@ -46,12 +46,10 @@ def create():
 def update(song_id):
     """ receives post requests for entry updates """
     song_info = songDB.fetch_single_song(song_id)
-    print(song_info)
     if request.method == 'POST':
         try:
             song_name = request.form['new_name']
             artist = request.form['new_artist']
-            print(song_name, artist)
             songDB.update_entry(song_id, song_name, artist)
             return redirect("/search/song")
         except:

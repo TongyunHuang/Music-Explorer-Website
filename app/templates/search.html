@@ -29,9 +29,15 @@
                     <li>
                         <a class="navbar_links">|</a>
                     </li>
-                    <li>
-                        <a href="/sign_in" class="button">Sign in</a>
-                    </li>
+                    {% if user is not defined: %}
+                        <li>
+                            <a href="/sign_in" class="button">Sign in</a>
+                        </li>
+                    {% else: %} 
+                        <li>
+                            <img class= "avatar" src="{{url_for('static', filename='images/user_default_profile.png')}}">
+                        </li>
+                    {% endif %}
                 </ul>
             </nav>
         </div>

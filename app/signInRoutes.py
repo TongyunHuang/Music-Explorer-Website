@@ -49,7 +49,6 @@ def sign_in():
             Message = "The username does not exist!"
             return render_template("sign_in.html", Message=Message)
         else:
-            Message = "You've logged in!"
-            return render_template("sign_in.html", Message=Message)
+            return render_template("index.html", user=username)
     else:
         return render_template('sign_in.html')
