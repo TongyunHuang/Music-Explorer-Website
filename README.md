@@ -1,7 +1,7 @@
 # MusicExplorer
 CS411 Final Project
 
-Updated Apr 10 8:30 pm
+
 ### Project Structure
 ```
 .
@@ -36,40 +36,11 @@ Updated Apr 10 8:30 pm
 └── main.py                        [flask run starts here]
 ```
 
-### Usage
-- Index page
-![](./view/index.png)
-
-- Search Page
-![](./view/search.png)
-
-- Song display
-![](./view/search:song.png)
-
-- Song CRUB: Search by key
-![](./view/search:word.png)
-
-- Song CRUB: insert
-![](./view/insert.png)
-![](./view/display_insert.png)
-
-- Song CRUB: update
-    - Update form
-    ![](./view/update.png)
-
-    - Change value
-    ![](./view/change.png)
-
-    - Updated res
-    ![](./view/updated.png)
-
-- Song CRUB: delete
-![](./view/deleted.png)
-
-- Advance query index
-![](./view/advance_idx.png)
-
-- TH Advance query
-![](./view/adv_sql.png)
+### Routing
 
 
+### Changelog
+- Updated Apr 10 8:30 pm: Finish CRUB and connected to DB
+- Updated Apr 25:
+    - Wenjie: login and signup page
+    - Tongyun: 
