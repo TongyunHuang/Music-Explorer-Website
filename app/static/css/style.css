@@ -437,12 +437,113 @@
     border-radius: 50%;
     margin: 15px 5px 10px 25px;
 }
-
-
-ul {
-    list-style-type: none;
+.avatar:hover {
+    cursor: pointer;
 }
+.sub_menu {
+    border-color: red;
+}
+
+#sub_menu ul{
+    position: absolute;
+    top: 70px;
+    display: grid;
+    opacity: 0;
+    background-color: rgb(238, 248, 248);
+    border-radius: 5px;
+    padding: 10px;
+
+}
+
+#sub_menu li:hover {
+    cursor: pointer;
+}
+
+.profile_menu {
+    margin: 50px 250px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.profile_menu li {
+    font-size: 25px;
+    padding: 20px;
+
+}
+
+.profile_menu a {
+    text-decoration: none; color:black
+}
+
+.profile_menu a:visited {
+    text-decoration: none; color:black
+}
+
+.profile_menu .vl {
+    position: absolute;
+    top: 130px;
+    left: 570px;
+    border-left: 2px solid black;
+    height: 700px;
+}
+
+.profile_content{
+    top: 150px;
+    left: 700px;
+    width: 900px;
+    position: absolute;
+}
+.profile_settings label {
+    font-family: 'Lato', sans-serif;
+    font-size: 19px;
+    color: #333;
+    height: 20px;
+    width: 200px;
+    margin: 15px;
+    text-align: right;
+    float:left;
+}
+.profile_settings input {
+    height: 40px;
+    width: 500px;
+    border: 1px solid black;
+    margin-top: 10px;
+}
+
+.profile_settings button {
+    margin-left: 150px;
+    border-radius: 3px;
+    width: 500px;
+}
+
+.profile_settings span {
+    display: block;
+    color: rgb(224, 53, 53);
+    width: 300%;
+    margin-left: 210px;
+    font-size: 17px;
+    font-family: 'Lato', sans-serif;
+} 
+
+.profile_settings i {
+    margin-left: -30px;
+    cursor: pointer;
+}
+
+
+
+
+/* .avatar:hover .sub_menu {
+    display: block;
+    background-color: red;
+} */
 
 a {
     text-decoration: none;
 }
+
+li {
+    list-style: none;
+}
+
+a:active { text-decoration: none; color:black }
+a:visited { text-decoration: none; color:black; }

@@ -34,6 +34,13 @@
                     {% else: %} 
                         <li>
                             <img class= "avatar" src="{{url_for('static', filename='images/user_default_profile.png')}}">
+                            <div class="sub_menu">
+                                <ul>                                
+                                    <li>My profile</li>
+                                    <li><a href="/index">Logout</a></li>
+                                </ul>
+
+                            </div>
                         </li>
                     {% endif %}
                 </ul>
@@ -69,6 +76,23 @@
                 song.play();
             }
         }
+
+
+        /**
+         * A menu will drop down when clicking user's avatar
+         * Menu includes "My profile" and "Logout"
+         */
+
+        function showDropDownMenu() {
+            let submenu = document.getElementById("sub_menu").getElementsByTagName("ul");
+            if (submenu[0].style.opacity == 1) {
+                submenu[0].style.opacity = 0;
+            } else {
+                submenu[0].style.opacity = 1;
+            }
+        }
+
+
     </script>
 </body>
 </html>

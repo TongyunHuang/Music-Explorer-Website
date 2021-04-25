@@ -35,7 +35,14 @@
                         </li>
                     {% else: %} 
                         <li>
-                            <img class= "avatar" src="{{url_for('static', filename='images/user_default_profile.png')}}">
+                            <img class= "avatar" src="{{url_for('static', filename='images/user_default_profile.png')}}" onclick="showDropDownMenu()">
+                            <div id="sub_menu">
+                                <ul>                                
+                                    <li><a href="/profile/{{user}}">My profile</a></li>
+                                    <li><a href="/search">Logout <i class="fa fa-sign-out"></i></a></li>
+                                </ul>
+
+                            </div>
                         </li>
                     {% endif %}
                 </ul>
@@ -136,6 +143,7 @@
             {% endfor %}
             <th>update</th>
             <th>delete</th>
+            <th>Like</th>
         </thead>
         <!-- Table Entry -->
         <tbody id="table_entry">
@@ -146,6 +154,7 @@
                 {% endfor %}
                 <td><a href="{{table}}/update/{{item[0]}}" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#task-modal" >edit</a></td>
                 <td><a  href="{{table}}/delete/{{item[0]}}" class="btn btn-outline-secondary btn-sm remove" >Delete</a></td>
+                <td>&#9825</td>
                 <!-- <td><button class="btn btn-outline-secondary btn-sm remove" data-source="{{item[0]}}" type="button"><i class="fa fa-trash fa-1" aria-hidden="true"></i></button></td> -->
             </tr> 
             {% endfor %}
@@ -153,20 +162,24 @@
     </table>
 
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>    
-    <!-- <script src="static/script/app.js"></script>-->
+    <script src="static/script/app.js"></script>
     <!-- <script src="static/script/model.js"></script>  -->
-    <!-- <script>
+    <script>
+        /**
+         * A menu will drop down when clicking user's avatar
+         * Menu includes "My profile" and "Logout"
+         */
 
-        function passIn(dataVariable) {
-            receive(dataVariable);
+        function showDropDownMenu() {
+            let submenu = document.getElementById("sub_menu").getElementsByTagName("ul");
+            if (submenu[0].style.opacity == 1) {
+                submenu[0].style.opacity = 0;
+            } else {
+                submenu[0].style.opacity = 1;
+            }
         }
-        passIn({{dataTable | safe}});
 
-        function displayTable(id) {
-            updateTableOnClick(id);
-        }
-
-    </script> -->
+    </script>
 
 
 </body>

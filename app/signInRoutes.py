@@ -17,7 +17,6 @@ def user_sign_up():
     username = request.args.get("username")
     password = request.args.get("password")
     confirmPassword = request.args.get("confirmPassword")
-    print(username, password, confirmPassword)
     if username or password or confirmPassword:
         if password != confirmPassword:
             Message = "The password you entered do not match!"
@@ -49,6 +48,17 @@ def sign_in():
             Message = "The username does not exist!"
             return render_template("sign_in.html", Message=Message)
         else:
-            return render_template("index.html", user=username)
+            return redirect("/search/{username}".format(username=username))
     else:
         return render_template('sign_in.html')
+
+@app.route("/search/<username>")
+def search_after_login(username):
+    '''
+    Search page after user logging in successfully
+    User will be able to click like button of each song and it will update "Like" table in the backend.
+    TODO
+    '''
+    
+
+    return render_template('search.html', user=username)
