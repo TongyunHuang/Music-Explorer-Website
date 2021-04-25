@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <div class="navbar_container">
+            <a href="/" id="navbar_logo">
+                <img src="{{url_for('static', filename='images/logo.png')}}" alt="Music Explorer">
+            </a>
+            <nav>
+                <ul>
+                    <li>        
+                        <a href="/" class="navbar_links">Home</a>
+                    </li>
+                    <li>
+                        <a href="/search" class="navbar_links">Search</a>
+                    </li>
+                    <li>
+                        <a href="/advance" class="navbar_links">Advance</a>
+                    </li>
+                    <li>
+                        <a class="navbar_links">|</a>
+                    </li>
+                    {% if user is not defined: %}
+                        <li>
+                            <a href="/sign_in" class="button">Sign in</a>
+                        </li>
+                    {% else: %} 
+                        <li>
+                            <img class= "avatar" src="{{url_for('static', filename='images/user_default_profile.png')}}" onclick="showDropDownMenu()">
+                            <div id="sub_menu">
+                                <ul>                                
+                                    <li>My profile</li>
+                                    <li><a href="/search">Logout <i class="fa fa-sign-out"></i></a></li>
+                                </ul>
+
+                            </div>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="profile_menu">
+        <ul>
+            <li><a href="/profile/{{user}}/like">My Liked Songs</a></li>
+            <li><a href="/profile/{{user}}/recommendations">Recommendations</a></li>
+            <li><a href="/profile/{{user}}/settings">Settings</a></li>
+        </ul>
+        <div class="vl"></div>
+    </div>
+
+    <div class="profile_content">
+        {% if settings is defined: %}
+            <form class="profile_settings" autocomplete="off">
+                <div class="form_group">
+                    <label for="username">Username:</label>  
+                    <input type="text" id="username" class="text_input" value="{{user}}" name="username" readonly style="background-color: lightgray;">
+                </div>
+                <div class="form_group">
+                    <label for="new_password">New Password:</label>  
+                    <input type="password" id="new_password" class="text_input" placeholder="Enter new Password" name="new_password">
+                    <i class="far fa-eye" id="togglePassword1" onclick="viewPassword(this.id)"></i>
+                </div>
+                <div class="form_group">
+                    <label for="confirm_password">Confirm New Password:</label>  
+                    <input type="password" id="confirm_password" class="text_input" placeholder="Confirm new Password" name="confirm_password">
+                    <i class="far fa-eye" id="togglePassword2" onclick="viewPassword(this.id)"></i>
+                </div>
+                <span>{{Message}}</span>
+                <button type="submit" class="submit_button">Update</button>
+            </form>    
+
+
+        {%endif%}
+    </div>
+
+</body>
+
+<script>
+    /**
+     * A menu will drop down when clicking user's avatar
+     * Menu includes "My profile" and "Logout"
+     */
+
+    function showDropDownMenu() {
+        let submenu = document.getElementById("sub_menu").getElementsByTagName("ul");
+        if (submenu[0].style.opacity == 1) {
+            submenu[0].style.opacity = 0;
+        } else {
+            submenu[0].style.opacity = 1;
+        }
+    }
+
+    /**
+     * A function used to toggle password visibility
+     * Reference: https://www.javascripttutorial.net/javascript-dom/javascript-toggle-password-visibility/
+     */
+    function viewPassword(viewerId) {
+        var eye = document.getElementById(viewerId);
+        if (viewerId === "togglePassword1") {
+            var passwordInput = document.getElementById("new_password");
+        } else if (viewerId === "togglePassword2") {
+            var passwordInput = document.getElementById("confirm_password");
+        }
+
+        if (passwordInput.getAttribute('type') == "text") {
+            passwordInput.setAttribute('type', "password");
+        } else {
+            passwordInput.setAttribute('type', "text");
+        }
+
+        eye.classList.toggle('fa-eye-slash');
+    }
+
+
+</script>
+
+
+
+</html>

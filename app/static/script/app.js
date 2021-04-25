@@ -27,6 +27,10 @@ function updateTableOnClick(id) {
     }
 }
 
+
+
+
+
 /**
  * transfer between different table
  * Not called
