@@ -1,4 +1,4 @@
-from flask import Flask, render_template,request,jsonify
+from flask import Flask, render_template,request,jsonify, session
 from app import app
 from app import database as db_helper
 import json
@@ -8,85 +8,40 @@ from app import artistDB as artistDB
 from app import commentDB as commentDB
 from app import coverDB as coverDB
 
+# app = Flask(__name__)
+
+# Set the secret key to some random bytes. Keep this really secret!
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+
+def getUser():
+    '''
+    get log in status
+    @return visitor - True if not logged in, Flase if already log in
+            username - empty string if not logged in 
+                     - current username if log in 
+    '''
+    visitor = True
+    username = ''
+    if 'user_name' in session:
+        print("enter if statement")
+        visitor = False
+        username = session['user_name']
+    return visitor, username
+
 @app.route("/")
 def homepage():
-    '''
-    Website starts from here
-    '''
-    return render_template("index.html")
+    ''' Website starts from here '''
+    visitor, username  = getUser()
+    return render_template("index.html",visitor=visitor,username=username)
 
 @app.route("/search")
 def search():
-    '''
-    Search page starts from here
-    '''
-    return render_template('search.html')
+    ''' Search page starts from here '''
+    visitor, username  = getUser()
+    return render_template('search.html',visitor=visitor,username=username)
 
 @app.route("/advance")
 def advance():
-    '''
-    Advance query index page starts from here
-    '''
-    return render_template('adv_sql_index.html')
-
-'''
-DISPLAY - Limit 15
-'''
-
-
-# @app.route("/search/comment")
-# def get_comment_entry():
-#     '''
-#     Display comment table on Interface
-#     '''
-#     data, dataCol = db_helper.fetch_comment()
-#     return render_template("search.html", items=data, header=dataCol)
-
-# @app.route("/search/artist")
-# def get_artist_entry():
-#     '''
-#     Display artist table on Interface
-#     '''
-#     data, dataCol = db_helper.fetch_artist()
-#     return render_template("search.html", items=data, header=dataCol)
-
-# @app.route("/search/cover")
-# def get_cover_entry():
-#     '''
-#     Display cover table on Interface
-#     '''
-#     data, dataCol = db_helper.fetch_cover()
-#     return render_template("search.html", items=data, header=dataCol)
-
-
-'''
-UPDATE
-'''
-def update_song_entry():
-    pass
-
-def update_artist_entry():
-    pass
-
-def update_album_entry():
-    pass
-
-def update_user_entry():
-    pass
-
-'''
-DELETE
-'''
-def delete_song_entry():
-    pass
-
-def delete_artist_entry():
-    pass
-
-def delete_album_entry():
-    pass
-
-def delete_user_entry():
-    pass
-
-
+    ''' Advance query index page starts from here '''
+    visitor, username  = getUser()
+    return render_template('adv_sql_index.html',visitor=visitor,username=username)

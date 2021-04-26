@@ -29,32 +29,25 @@
                     <li>
                         <a class="navbar_links">|</a>
                     </li>
-                    {% if user is not defined: %}
-                        <li>
-                            <a href="/sign_in" class="button">Sign in</a>
-                        </li>
-                    {% else: %} 
-                        <li>
-                            <img class= "avatar" src="{{url_for('static', filename='images/user_default_profile.png')}}" onclick="showDropDownMenu()">
-                            <div id="sub_menu">
-                                <ul>                                
-                                    <li>My profile</li>
-                                    <li><a href="/search">Logout <i class="fa fa-sign-out"></i></a></li>
-                                </ul>
-
-                            </div>
-                        </li>
-                    {% endif %}
+                    <li>
+                        <img class= "avatar" src="{{url_for('static', filename='images/user_default_profile.png')}}">
+                        <div class="sub_menu">                        
+                            <li><a href="/profile">My profile</a></li>
+                            <li><a class="navbar_links">|</a></li>
+                            <li><a href="/log_out">Logout</a></li>
+                        </div>
+                    </li>
                 </ul>
             </nav>
         </div>
     </div>
-
+    
     <div class="profile_menu">
+        <li>Welcome! {{user}}</li>
         <ul>
-            <li><a href="/profile/{{user}}/like">My Liked Songs</a></li>
-            <li><a href="/profile/{{user}}/recommendations">Recommendations</a></li>
-            <li><a href="/profile/{{user}}/settings">Settings</a></li>
+            <li><a href="/profile/like">My Liked Songs</a></li>
+            <li><a href="/profile/recommendations">Recommendations</a></li>
+            <li><a href="/profile/settings">Settings</a></li>
         </ul>
         <div class="vl"></div>
     </div>

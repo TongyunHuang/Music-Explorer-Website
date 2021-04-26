@@ -3,6 +3,7 @@ from app import app
 from app import database as db_helper
 import json
 from app import songDB as songDB
+from app import routes as routes
 '''
 Song CRUB backend: Insert, Update, Delete, Search by Song keywords
 Tongyun advanceSQL backend.
@@ -85,3 +86,23 @@ def tongyun_adv():
         res, res_col = songDB.tongyun_fetch(decade)
         return render_template("tongyun_adv_sql.html",header=res_col, items=res)
     return render_template("tongyun_adv_sql.html")
+
+@app.route("/search/song/like/<song_name>")
+def like(song_name):
+    '''
+    receive request for a user liking a song
+    '''
+    visitor, username  = routes.getUser()
+    if visitor:
+        return redirect("/sign_in")
+    else:
+        try:
+            print("insert like res: ( " + username + " , " + song_name +" )")
+            res = songDB.insert_like_song(username,song_name)
+            
+            result = {'success': True, 'response': 'Removed task'}
+            return redirect("/search/song")
+            
+        except:
+            result = {'success': False, 'response': 'Something went wrong','user':username,'song_name':song_name}
+            return jsonify(result)

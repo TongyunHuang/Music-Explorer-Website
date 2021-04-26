@@ -44,14 +44,9 @@ def insert_new_song(song_id,song_name,artist,duration,popularity):
     """
 
     conn = db.connect()
-    # query_sql = 'Insert Into Song (song_id,song_name,artist_name,duration,popularity) VALUES (" '
-    # +song_id+' ","'+song_name+' ","'+artist_name+' ","'+duration+' ",'+str(popularity)+');'
-    # query_sql = """Insert Into Song (song_id,song_name,artist_name,duration,popularity) VALUES (" :song_id' ","'+song_name+' ","'+artist_name+' ","'+duration+' ",'+str(popularity)+');"""
     query_sql = """Insert Into Song (song_id,song_name,artist_name,duration,popularity) VALUES ( :song_id , :song_name , :artist_name , :duration , :popularity  );"""
     # db is sqlalchemy session object
     query_results = conn.execute(text(query_sql), {"song_id": song_id, "song_name":song_name, "artist_name":artist, "duration":duration, "popularity":popularity})
-    # .format(song_id,song_name,artist,duration,popularity)
-    # conn.execute(query)
     query_results = conn.execute("Select LAST_INSERT_ID();")
     query_results = [x for x in query_results]
     task_id = query_results[0][0]
@@ -112,3 +107,23 @@ def tongyun_fetch(decade):
     res_col = ['artist_name', 'num_followers', 'song_name', 'album_name', 'release_date', 'popularity']
     conn.close()
     return query_results, res_col
+
+def insert_like_song(username,song_name):
+    """
+    Insert new like relation to databse.
+        @Args: username, song_name
+        @Returns: The task ID for the inserted entry
+    """
+    
+    conn = db.connect()
+    # query_sql = """Insert Into Like (username, like_song_name) VALUES ( "test" , "test"  );"""
+
+    # query_results = conn.execute( query_sql )
+    query_results = conn.execute("Select * from Like;").fetchall()
+    # query_sql = """Insert Into Like (username, like_song_name) VALUES ( :username , :song_name  );"""
+    
+    # db is sqlalchemy session object
+    # query_results = conn.execute( text(query_sql), {"username":username,"song_name": song_name} )
+    print(query_results)
+    conn.close()
+    return 1

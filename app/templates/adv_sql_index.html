@@ -30,9 +30,20 @@
                     <li>
                         <a class="navbar_links">|</a>
                     </li>
-                    <li>
-                        <a href="/sign_in" class="button">Sign in</a>
-                    </li>
+                    {% if visitor %}
+                        <li>
+                            <a href="/sign_in" class="button">Sign in</a>
+                        </li>
+                    {% else %} 
+                        <li>
+                            <img class= "avatar" src="{{url_for('static', filename='images/user_default_profile.png')}}">
+                            <div class="sub_menu">                        
+                                <li><a href="/profile">My profile</a></li>
+                                <li><a class="navbar_links">|</a></li>
+                                <li><a href="/log_out">Logout</a></li>
+                            </div>
+                        </li>
+                    {% endif %}
                 </ul>
             </nav>
         </div>

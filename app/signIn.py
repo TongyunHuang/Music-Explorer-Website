@@ -40,6 +40,7 @@ def user_login(username, password):
         conn.close()
         return -1
     elif password != password_found[0][0]: # incorrect password 
+        print(password_found[0][0])
         conn.close()
         return 0
     else:

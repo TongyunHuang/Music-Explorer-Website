@@ -1,5 +1,5 @@
 from logging import log
-from flask import Flask, render_template,request,jsonify,redirect
+from flask import Flask, render_template,request,jsonify,redirect,session
 from app import app
 from app import database as db_helper
 import json
@@ -26,8 +26,10 @@ def user_sign_up():
             if create_results == 0:
                 Message = "Username already exists!"
                 return render_template("sign_up.html", Message=Message)
-            Message = "You've successfully signed up!"
-            return render_template("sign_up.html", Message=Message)
+            else:# Successfully sign up                
+                return redirect("sign_in")
+                # Message = "You've successfully signed up!"
+                # return render_template("sign_up.html", Message=Message)
     else:
         return render_template("sign_up.html")
 
@@ -47,8 +49,14 @@ def sign_in():
         elif login_results == -1:
             Message = "The username does not exist!"
             return render_template("sign_in.html", Message=Message)
-        else:
-            return redirect("/search/{username}".format(username=username))
+        # successfully sign in, redirect to main page
+        # setup session variable to stores data across requests
+        else: 
+            session.clear()
+            session['user_name'] = username
+            print("here" + session['user_name'])
+            return redirect("/")
+            # return redirect("/search/{username}".format(username=username))
     else:
         return render_template('sign_in.html')
 
@@ -59,6 +67,11 @@ def search_after_login(username):
     User will be able to click like button of each song and it will update "Like" table in the backend.
     TODO
     '''
-    
+    username = session['user_name']
 
     return render_template('search.html', user=username)
+
+@app.route("/log_out")
+def logout():
+    session.pop('user_name', None)
+    return redirect('/')
