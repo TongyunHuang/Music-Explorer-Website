@@ -141,7 +141,9 @@
             {% endfor %}
             <th>update</th>
             <th>delete</th>
+            {% if table == "song" %}
             <th>Like</th>
+            {% endif %}
         </thead>
         <!-- Table Entry -->
         <tbody id="table_entry">

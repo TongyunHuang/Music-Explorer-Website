@@ -41,7 +41,7 @@
             </nav>
         </div>
     </div>
-    
+    <!-- Profile page left navigation bar -->
     <div class="profile_menu">
         <li>Welcome! {{user}}</li>
         <ul>
@@ -51,7 +51,7 @@
         </ul>
         <div class="vl"></div>
     </div>
-
+    <!-- Resetting password form -->
     <div class="profile_content">
         {% if settings is defined: %}
             <form class="profile_settings" autocomplete="off">
@@ -77,6 +77,61 @@
         {%endif%}
     </div>
 
+    <!-- Like table display -->
+    {% if like is defined: %}
+    <div class="profile_content">
+        
+        <table class="main_table"  >
+            <!-- Table Header -->
+            <thead style="background-color: lightblue" id="table_title">
+                <th>Song name</th>
+                <th>Artist name</th>
+                {% if recSong is defined: %}
+                <th>Like</th>
+                {% else %}
+                <th>Dislike</th>
+                {%endif%}
+            </thead>
+            <!-- Table Entry -->
+            <tbody id="table_entry">
+                {% for item in items %}
+                <tr>
+                    <td>{{item[1]}}</td>
+                    <td>{{item[2]}}</td>
+                    {% if recSong is defined: %}
+                    <td><a  href="like/{{item[0]}}" class="btn btn-outline-secondary btn-sm remove" >Like</a></td>
+                    {% else %}
+                    <td><a  href="dislike/{{item[0]}}" class="btn btn-outline-secondary btn-sm remove" >Dislike</a></td>
+                    {%endif%}
+                </tr> 
+                {% endfor %}
+            </tbody>
+        </table>
+        
+    </div>
+    {%endif%}
+
+    <!-- Recommend table display -->
+    <div class="profile_content">
+        {% if recommend is defined: %}
+        <table class="main_table"  >
+            <!-- Table Header -->
+            <thead style="background-color: lightblue" id="table_title">
+                <th>List name</th>
+                <th>Score </th>
+            </thead>
+            <!-- Table Entry -->
+            <tbody id="table_entry">
+                {% for item in listItems %}
+                <tr>
+                    <td><a  href="list/{{item[1]}}" class="btn btn-outline-secondary btn-sm remove" >{{item[1]}}</a></td>
+                    <td>{{item[2]}}</td>
+                </tr> 
+                {% endfor %}
+            </tbody>
+        </table>
+        {%endif%}
+    </div>
 </body>
 
 <script>

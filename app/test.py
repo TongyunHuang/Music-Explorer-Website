@@ -2,6 +2,7 @@ import os
 import sqlalchemy
 from yaml import load, Loader
 from flask import Flask
+from sqlalchemy import text
 '''
 connect to GCP database
 '''
@@ -27,6 +28,20 @@ def init_connect_engine():
 
 db = init_connect_engine()
 
-conn = db.connect()
-query_results = conn.execute("Select * from Like;").fetchall()
-print(query_results)
+# testing function
+def getRecSong(username):
+    '''
+    Fetch list of recommended "playlist" from GCP
+    '''
+    conn = db.connect()
+    query = """SELECT ours.username, theirs.username, count(*) as `score`
+FROM Favorite as `theirs`, (SELECT f.username, f.liked_song_name FROM Favorite f JOIN Song s ON f.liked_song_name=s.song_id
+                              WHERE f.username = :username ) as `ours`
+WHERE theirs.username != :username AND theirs.liked_song_name = ours.liked_song_name
+GROUP BY theirs.username ORDER BY score DESC;"""
+    playlist_list = conn.execute(text(query),{ "username":username}).fetchall()
+    print(playlist_list)
+    conn.close()
+    return playlist_list
+
+getRecSong("test")

@@ -108,22 +108,17 @@ def tongyun_fetch(decade):
     conn.close()
     return query_results, res_col
 
-def insert_like_song(username,song_name):
+def insert_like_song(username,song_id):
     """
     Insert new like relation to databse.
-        @Args: username, song_name
+        @Args: username, song_id
         @Returns: The task ID for the inserted entry
     """
-    
     conn = db.connect()
-    # query_sql = """Insert Into Like (username, like_song_name) VALUES ( "test" , "test"  );"""
-
-    # query_results = conn.execute( query_sql )
-    query_results = conn.execute("Select * from Like;").fetchall()
-    # query_sql = """Insert Into Like (username, like_song_name) VALUES ( :username , :song_name  );"""
-    
+    query_sql = """Insert Into Favorite (username, liked_song_name) VALUES ( :username , :song_id  );"""
     # db is sqlalchemy session object
-    # query_results = conn.execute( text(query_sql), {"username":username,"song_name": song_name} )
-    print(query_results)
+    query_results = conn.execute( text(query_sql), {"username":username,"song_id": song_id} )
     conn.close()
     return 1
+
+

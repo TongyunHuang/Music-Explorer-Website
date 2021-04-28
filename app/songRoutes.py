@@ -35,7 +35,7 @@ def create():
     artist = request.args.get('artist')
     duration = request.args.get('duration')
     popularity = request.args.get('popularity')
-    print(song_id, song_name)
+    # print("song create - " + song_id + song_name)
     if song_name or artist or duration or popularity:
         songDB.insert_new_song(song_id,song_name,artist,duration,int(popularity))
         result = {'success': True, 'response': 'Done'}
@@ -63,7 +63,7 @@ def update(song_id):
 @app.route("/search/song/delete/<song_id>")
 def delete(song_id):
     """ receives post requests for entry delete """
-    print("song_id = "+song_id)
+    print("song delete song_id = "+song_id)
     try:
         songDB.remove_song_by_id(song_id)
         result = {'success': True, 'response': 'Removed task'}
@@ -87,8 +87,8 @@ def tongyun_adv():
         return render_template("tongyun_adv_sql.html",header=res_col, items=res)
     return render_template("tongyun_adv_sql.html")
 
-@app.route("/search/song/like/<song_name>")
-def like(song_name):
+@app.route("/search/song/like/<song_id>")
+def like(song_id):
     '''
     receive request for a user liking a song
     '''
@@ -97,12 +97,11 @@ def like(song_name):
         return redirect("/sign_in")
     else:
         try:
-            print("insert like res: ( " + username + " , " + song_name +" )")
-            res = songDB.insert_like_song(username,song_name)
-            
+            res = songDB.insert_like_song(username,song_id)
             result = {'success': True, 'response': 'Removed task'}
             return redirect("/search/song")
-            
         except:
             result = {'success': False, 'response': 'Something went wrong','user':username,'song_name':song_name}
             return jsonify(result)
+
+

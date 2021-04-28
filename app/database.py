@@ -12,8 +12,8 @@ def fetch_song():
     res_col = [column_name[6][0],column_name[0][0], column_name[2][0], column_name[4][0], column_name[5][0]]
     for result in query_results:
         count += 1
-        if count > number_of_results_displayed:
-            break
+        # if count > number_of_results_displayed:
+        #     break
         item = [
             result[6],
                 result[0],
