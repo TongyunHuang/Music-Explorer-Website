@@ -1,4 +1,4 @@
-runtime: python3
+runtime: python38
 
 instance_class: F1
 
@@ -7,6 +7,7 @@ env_variables:
   MYSQL_PASSWORD: 'saltyfish411'   ##<fill password>
   MYSQL_DB: 'musicDB'
   MYSQL_HOST: '173.255.116.10' ## ??
+  CLOUD_SQL_CONNECTION_NAME: 'music-explorer-307006:us-central1:music-sql'
 
 # Local Instance
 
